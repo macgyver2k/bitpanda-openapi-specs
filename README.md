@@ -1,7 +1,25 @@
-# Bitpanda Public API
-OpenAPI 3.0 definition for bitpanda.com public API
+# 🐼 Bitpanda Public API
 
-## Version: 1.0.0-oas3
+## OpenAPI 3.0 definition for bitpanda.com public API
+
+- 😕 Bitpanda does not provide any Swagger or OpenAPI specifications
+- 🔥 Official documentation: https://developers.bitpanda.com/platform/
+- 🚀 Use this YAML to generate API clients for any language with
+    - C#: https://github.com/RicoSuter/NSwag
+    - JS/TS: https://swagger.io/tools/swagger-codegen/
+    - any other tool supporting OpenAPI 3.0
+- 😎 Check it out right now: 
+    - you need an API key from https://web.bitpanda.com/apikey
+    - https://app.swaggerhub.com/apis/macgyver2k/BitPanda/1.0.0-oas3    
+        - click 'Authorize' on the top right side and enter API key
+
+
+---
+
+### The full specification converted to markdown via `openapi-markdown`
+- https://github.com/theBenForce/openapi-markdown
+
+---
 
 ### /wallets
 
