@@ -13,23 +13,6 @@
     - https://app.swaggerhub.com/apis/macgyver2k/BitPanda/1.0.0-oas3    
         - click 'Authorize' on the top right side and enter API key
 
-<style>
-    @media (prefers-color-scheme: dark) {
-        .swaggerImage {
-            display: none
-        }
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .swaggerImageDark {
-            display: none
-        }
-    }
-</style>
-
-<img swaggerImage src ="images/swagger-ui.png"></img>
-<img swaggerImageDark src ="images/swagger-ui.png"></img>
-
  ![You ](images/swagger-ui.png)
 
 ---
