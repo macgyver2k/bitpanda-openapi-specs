@@ -13,6 +13,7 @@
     - https://app.swaggerhub.com/apis/macgyver2k/BitPanda/1.0.0-oas3    
         - click 'Authorize' on the top right side and enter API key
 
+ ![You ](images/swagger-ui.png)
 
 ---
 
