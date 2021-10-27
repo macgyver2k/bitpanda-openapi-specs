@@ -1,7 +1,7 @@
-﻿openapi: 3.0.0
+openapi: 3.0.0
 info:
   description: OpenAPI 3.0 definition for bitpanda.com public API
-  version: 1.0.0-oas3
+  version: '2.0'
   title: Bitpanda Public API
 security:
   - api_key: []
@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Wallet'
+                  $ref: '#/components/schemas/WalletsResult'
   /trades:
     get:
       tags: 
@@ -203,6 +203,14 @@ components:
       in: header
       name: X-API-KEY
   schemas:
+    WalletsResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Wallet'
+  
     AssetCommodityTransactionsResult:
       type: object
       required:
@@ -255,7 +263,7 @@ components:
         - tx_id
       properties:
         amount:
-          type: string
+          type: number
           format: decimal
           example: "10.00000000"
         recipient: 
@@ -274,7 +282,7 @@ components:
         status: 
           $ref: '#/components/schemas/TransactionStatus'
         amount_eur: 
-          type: string
+          type: number
           format: decimal
           example: "34333.00"
         purpose_text:
@@ -309,14 +317,14 @@ components:
         last_changed: 
           $ref: '#/components/schemas/TimeResult' 
         fee:
-          type: string
+          type: number
           format: decimal
           example: "0.00000000"
         current_fiat_id:
           type: string
           example: "2"
         current_fiat_amount: 
-          type: string
+          type: number
           format: decimal
           example: "39021.02"
         tx_id: 
@@ -340,12 +348,9 @@ components:
           $ref: '#/components/schemas/TransactionPublicStatus'
     
     AssetCommodityTransactionsResultLinksResult:
-      required:
-        - self
       properties:
         self:
           type: string
-          format: url
           example: "?page=1&page_size=25"
   
     AssetWalletsResult:
@@ -475,7 +480,7 @@ components:
           type: string
           example: "EUR"
         ballance:
-          type: string
+          type: number
           format: decimal
           example: "9909.00000000"
         name:
@@ -532,8 +537,6 @@ components:
         - status
         - confirmation_by
         - confirmed
-        - payment_option_id
-        - requires_2fa_approval
         - last_changed
       properties:
         fiat_wallet_id: 
@@ -549,15 +552,15 @@ components:
           format: int32
           example: "1"
         amount:
-          type: string
+          type: number
           format: decimal
           example: "10.00000000"
         fee:
-          type: string
+          type: number
           format: decimal
           example: "0.00000000"
         to_eur_rate: 
-          type: string
+          type: number
           format: decimal
           example: "1.00000000"
         in_or_out: 
@@ -684,7 +687,7 @@ components:
         - tx_id
       properties:
         amount:
-          type: string
+          type: number
           format: decimal
           example: "10.00000000"
         recipient: 
@@ -703,7 +706,7 @@ components:
         status: 
           $ref: '#/components/schemas/TransactionStatus'
         amount_eur: 
-          type: string
+          type: number
           format: decimal
           example: "34333.00"
         purpose_text:
@@ -738,14 +741,14 @@ components:
         last_changed: 
           $ref: '#/components/schemas/TimeResult' 
         fee:
-          type: string
+          type: number
           format: decimal
           example: "0.00000000"
         current_fiat_id:
           type: string
           example: "2"
         current_fiat_amount: 
-          type: string
+          type: number
           format: decimal
           example: "39021.02"
         tx_id: 
@@ -821,7 +824,7 @@ components:
           type: string
           example: "BTC"
         balance:
-          type: string
+          type: number
           format: decimal
           example: "1.00000000"
         is_default:
@@ -839,7 +842,24 @@ components:
         is_index:
           type: boolean
           example: false
-  
+    
+    TagType:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "tag"
+        attributes:
+          $ref: '#/components/schemas/TagAttributes'
+    
+    TagAttributes:
+      type: object
+      properties:
+        short_name:
+          type: string
+        name:
+          type: string
+    
     TradeType:
       type: string
       enum:
@@ -858,7 +878,6 @@ components:
         - fiat_to_eur_rate
         - wallet_id
         - fiat_wallet_id
-        - payment_option_id
         - time
         - price
         - is_swap
@@ -875,14 +894,14 @@ components:
           type: string
           example: '1'
         amount_fiat:
-          type: string
+          type: number
           format: decimal
           example: '100.00'
         amount_cryptocoin:
           type: string
           example: '0,03325352'
         fiat_to_eur_rate:
-          type: string
+          type: number
           format: decimal
           example: '1.00000000'
         wallet_id:
@@ -899,7 +918,7 @@ components:
         time:
           $ref: '#/components/schemas/TimeResult'
         price:
-          type: string
+          type: number
           format: decimal
           example: '3007.20'
         is_swap:
@@ -917,8 +936,9 @@ components:
         tags:
           type: array
           items:
-            type: string
-            example: tag
+            $ref: '#/components/schemas/TagType'
+        related_swap_trade:
+          $ref: '#/components/schemas/Trade'
  
     TimeResult:
       type: object
@@ -948,20 +968,13 @@ components:
           $ref: '#/components/schemas/TradeAttributes'
   
     LinksResult:
-      required:
-        - next
-        - last
-        - self
       properties:
         next:
           type: string
-          format: url
         last:
           type: string
-          format: url
         self:
           type: string
-          format: url
   
     PagingResult:
       type: object
